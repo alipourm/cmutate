@@ -1,0 +1,52 @@
+Mutant generator for C-like languages
+Jamie Andrews
+May, 2005
+
+General comments:
+- There are really two executables:
+  - "descmutants", a Prolog program that just generates mutant
+    descriptions.  It's a simple filter that is invoked by
+    generateMutants.sh, so you don't have to invoke it directly.
+  - "generateMutants.sh", a shell script that takes the mutant
+    descriptions and actually generates the mutant source files.
+- There is a test program for you to generate mutants for,
+  "wc.c", a simple word-counting program.
+
+To compile:
+- You will need to have or to install SWI-Prolog.  SWI-Prolog is
+  arguably the best and most popular open-source Prolog.  The
+  program will probably work with other Prologs, but you'll have
+  to figure out the proper incantation to put in the Makefile
+  and you might have to make some minor tweaks to the source.
+- Put the SWI-Prolog compiler "pl" on your path.
+- Type "make" and you should get an executable called "descmutants".
+- Put that executable somewhere on your path or just leave it in
+  the directory where you are making the mutants.
+
+To generate mutants:
+- Make sure that the "descmutants" executable and the
+  "generateMutants.sh" shell script are in your path (or, just
+  in the directory where you are making the mutants).
+- Type "generateMutants.sh <sourcefile>", where <sourcefile> is
+  the name of your program (in a C-like language) that you want
+  to generate mutants for.
+
+Caveats:
+- The mutant generator is very stupid.  It just generates
+  mutants on a line-by-line basis.  It can't distinguish
+  declarations from statements.
+- As a result, some of the mutants are UNCOMPILABLE.  You will
+  have to try to compile them yourself, and always account for
+  the special case in which mutant number X doesn't have a
+  compiled version.
+- Some of the mutants will also be equivalent to the original.
+  I feel less guilty about those because we can't eliminate them
+  automatically!
+- Previous experience indicates that about 10% of the mutants
+  are uncompilable and about 10-15% are equivalent.
+
+Good luck and let me know if you have any problems.
+
+--Jamie Andrews.
+  andrews    .uwo        } Merge these two lines to obtain my e-mail address.
+         @csd    .ca     }
